@@ -32,10 +32,40 @@ d3.json("samples.json").then(function(data) {
     biodiv = data
     init();
     fillPanel("940");
+    barGraph();
   });
 
 
 
+function barGraph () {
+    firstSample = biodiv.samples.find(val=>val.id=="940");
+    slicedOtuId = firstSample.otu_ids.slice(0,10).reverse();
+    slicedSampleVal = firstSample.sample_values.slice(0,10).reverse();
+    slicedOtuLabels = firstSample.otu_labels.slice(0,10).reverse();
+
+    let trace1 = {
+        x: slicedSampleVal,
+        y:  slicedOtuId.map(id => "OTU " + id),
+        text: slicedOtuLabels,
+        name: "bar",
+        type: "bar",
+        orientation: "h"
+        };
+    let traceData = [trace1]; 
+    
+    let layout = {
+        title: "OTUs",
+        margin: {
+          l: 100,
+          r: 100,
+          t: 100,
+          b: 100
+        }
+      };
+    
+    Plotly.newPlot("bar", traceData, layout);  
+}  
+   
 
 
 
