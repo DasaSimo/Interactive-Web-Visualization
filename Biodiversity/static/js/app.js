@@ -1,6 +1,6 @@
 let biodiv = []
 
-function fill_panel (sub_id) {
+function fillPanel (sub_id) {
     var panel = d3.select("#sample-metadata");
 
     current_subj = biodiv.metadata.find(val=>val.id==sub_id);
@@ -11,15 +11,14 @@ function fill_panel (sub_id) {
     d3.select("#subj_loc").text("location: " + current_subj.location)
     d3.select("#subj_bbt").text("bbtype: " + current_subj.bbtype)
     d3.select("#subj_wfr").text("wfreq: " + current_subj.wfreq)
-   
-   
-
-    
-    console.log(current_subj);
+      
 }
 
+//d3.selectAll("#selDataset").on("change", optionChanged);
 
-
+function optionChanged(value) {
+    fillPanel(value);
+}
 
 function init() {
     let dropdownSubID = d3.select("#selDataset");
@@ -32,7 +31,7 @@ d3.json("samples.json").then(function(data) {
     console.log(data);
     biodiv = data
     init();
-    fill_panel("940");
+    fillPanel("940");
   });
 
 
