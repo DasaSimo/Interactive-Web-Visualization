@@ -1,5 +1,22 @@
 let biodiv = []
 
+d3.json("samples.json").then(function(data) {
+    console.log(data);
+    biodiv = data
+    init();
+    fillPanel("940");
+    barGraph();
+    BubbleGraph("940");
+    
+  });
+
+  function init() {
+    let dropdownSubID = d3.select("#selDataset");
+    biodiv.names.map(function(subject) {
+        return dropdownSubID.append("option").text(subject).property("value", subject);
+        });
+}
+
 function fillPanel (sub_id) {
     var panel = d3.select("#sample-metadata");
 
@@ -14,28 +31,12 @@ function fillPanel (sub_id) {
       
 }
 
-//d3.selectAll("#selDataset").on("change", optionChanged);
-
 function optionChanged(value) {
     fillPanel(value);
     reDrawBar(value);
+    BubbleGraph(value);
 }
 
-function init() {
-    let dropdownSubID = d3.select("#selDataset");
-    biodiv.names.map(function(subject) {
-        return dropdownSubID.append("option").text(subject).property("value", subject);
-        });
-}
-
-d3.json("samples.json").then(function(data) {
-    console.log(data);
-    biodiv = data
-    init();
-    fillPanel("940");
-    barGraph();
-    
-  });
 
 function reDrawBar (value) {
     firstSample = biodiv.samples.find(val=>val.id==value);
@@ -76,7 +77,32 @@ function barGraph () {
     
     Plotly.newPlot("bar", traceData, layout);  
 }  
-   
 
 
+function BubbleGraph (value) {
+    firstSample = biodiv.samples.find(val=>val.id==value);
+    let trace2 = {
+        x: firstSample.otu_ids,
+        y: firstSample.sample_values,
+        text: firstSample.otu_labels,
+        mode: 'markers',
+        marker: {
+        color: firstSample.otu_ids, 
+        colorscale: 'RdBu',
+        size: firstSample.sample_values,
+        }
+    };
+
+  
+    let data = [trace2];
+  
+    let layout = {
+    title: 'Biodiversity by Sample',
+    showlegend: false,
+    height: 600,
+    width: 1200
+    };
+  
+  Plotly.newPlot('bubble', data, layout);
+}    
 
