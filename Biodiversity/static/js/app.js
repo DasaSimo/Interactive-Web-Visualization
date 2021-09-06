@@ -7,10 +7,10 @@ d3.json("samples.json").then(function(data) {
     fillPanel("940");
     barGraph();
     BubbleGraph("940");
-    
-  });
+    gaugeBar ("940"); 
+});
 
-  function init() {
+function init() {
     let dropdownSubID = d3.select("#selDataset");
     biodiv.names.map(function(subject) {
         return dropdownSubID.append("option").text(subject).property("value", subject);
@@ -28,13 +28,13 @@ function fillPanel (sub_id) {
     d3.select("#subj_loc").text("location: " + current_subj.location)
     d3.select("#subj_bbt").text("bbtype: " + current_subj.bbtype)
     d3.select("#subj_wfr").text("wfreq: " + current_subj.wfreq)
-      
 }
 
 function optionChanged(value) {
     fillPanel(value);
     reDrawBar(value);
     BubbleGraph(value);
+    gaugeBar (value);
 }
 
 
@@ -106,3 +106,19 @@ function BubbleGraph (value) {
   Plotly.newPlot('bubble', data, layout);
 }    
 
+function gaugeBar (sub_id) {
+    current_subj = biodiv.metadata.find(val=>val.id==sub_id);
+    let data = [
+        {
+          domain: { x: [0, 1], y: [0, 1] },
+          value: current_subj.wfreq,
+          title: { text: "Scrubs per Week" },
+          type: "indicator",
+          mode: "gauge+number",
+          gauge: { axis: { range: [null, 10] } }
+        }
+      ];
+      
+      var layout = { width: 600, height: 400 };
+      Plotly.newPlot('gauge', data, layout);
+}
