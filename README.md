@@ -32,6 +32,7 @@ The function BubbleGraph works to display biodiversity for the selected subject 
 
 The washing frequency (scrubs per week) for selected subject ID is showcased using the gauge chart, implemented in the function gaugeBar. 
 
+[Belly Button Biodiversity Website](https://dasasimo.github.io/Interactive-Web-Visualization/Biodiversity/index.html)
 
 ![Belly Button Biodiversity Dashboard](Biodiversity/Images/Dashboard.png)
 
