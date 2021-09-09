@@ -1,17 +1,17 @@
 let biodiv = []
-// loading data from data file and dislpay initial screen for the first Subject Id (940) 
+// loading data from data file and display initial screen for the first Subject Id (940) 
 d3.json("samples.json").then(function(data) {
     console.log(data);
     biodiv = data
-    init();
+    initDropDown();
     fillPanel("940");
     barGraph();
     BubbleGraph("940");
     gaugeBar ("940"); 
 });
 
-// to populate Subject IDs from  data in input file to dropdown  
-function init() {
+// to populate Subject IDs from data from input file to dropdown  
+function initDropDown() {
     let dropdownSubID = d3.select("#selDataset");
     biodiv.names.map(function(subject) {
         return dropdownSubID.append("option").text(subject).property("value", subject);
@@ -120,9 +120,7 @@ function gaugeBar (sub_id) {
           mode: "gauge+number",
           gauge: { axis: { range: [null, 10] }, 
                    bar: {color: "darkgrey"}, 
-                   bgcolor : "#1f77b4",
-
-                              
+                   bgcolor : "#1f77b4"
           }
         }
      ];
