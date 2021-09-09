@@ -12,7 +12,7 @@ The dataset reveals that a small handful of microbial species (also called opera
 
 ### 1. Initialization
 
- We used the D3 library to read in `samples.json`and setup the intitial screnn display. The first subject ID data found in `sample.json` was retrieved for this initial display. The dropdown will be filled by using function initDropDown.
+ We used the D3 library to read in `samples.json`and setup the intitial screen display. The first subject ID data found in `sample.json` was retrieved for this initial display. The dropdown is filled by using function initDropDown.
 
 ### 2. Panel Info and Metadata 
 
@@ -25,12 +25,12 @@ Next the horizontal bar graph for selected subject with top ten OTUs is created 
 
 ### 4. Bubble Graph
 
-In bubble chart is displayed biodiversity found in each sample. Each bubble represents OTU by ID, with labels with Bacteria's identification. The size of the bubble displays sample value, and the color identify OTUs. 
-The function BubbleGraph works to display biodiversity for  selected subject ID.
+In bubble chart is displayed biodiversity of microbial species (OTU) found in each sample. Each bubble represents OTU by ID, with labels with species identification. The size of the bubble displays the sample value, and the color identify OTUs. 
+The function BubbleGraph works to display biodiversity for the selected subject ID.
 
 ### 5. Gauge Chart
 
-The washing frequency (scrubs per week) for selected subject ID is showcased using gauge chart, implemented in function gaugeBar. 
+The washing frequency (scrubs per week) for selected subject ID is showcased using the gauge chart, implemented in the function gaugeBar. 
 
 
 ![Belly Button Biodiversity Dashboard](Biodiversity/Images/Dashboard.png)
